@@ -1,5 +1,6 @@
 import hapi = require("hapi");
 import Promise = require("bluebird");
+import log = require("./log");
 var portFinder = require("portfinder");
 
 var server = new hapi.Server();
@@ -13,5 +14,9 @@ portFinder.getPort((err, port) => {
 function startServer() {
     server.connection({
         port: port
+    });
+
+    server.start(() => {
+        log.info("Server listening on port " + port);
     });
 }

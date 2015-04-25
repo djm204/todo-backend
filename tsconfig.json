@@ -17,6 +17,7 @@
         "./src/index.ts",
         "./src/log.ts",
         "./src/typings/bluebird/bluebird.d.ts",
+        "./src/typings/chalk/chalk.d.ts",
         "./src/typings/hapi/hapi.d.ts",
         "./src/typings/node/node.d.ts",
         "./src/typings/tsd.d.ts"
