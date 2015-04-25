@@ -1,0 +1,19 @@
+{
+  "name": "todo-backend",
+  "version": "0.1.0",
+  "description": "Todo: Backends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/longshot-io/todo-backend.git"
+  },
+  "author": "Carl Winkler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/longshot-io/todo-backend/issues"
+  },
+  "homepage": "https://github.com/longshot-io/todo-backend"
+}
