@@ -19,9 +19,11 @@
   "homepage": "https://github.com/longshot-io/todo-backend",
   "dependencies": {
     "bluebird": "^2.9.24",
+    "chai": "^2.2.0",
     "chalk": "^1.0.0",
     "hapi": "^8.4.0",
     "knex": "^0.7.6",
+    "mocha": "^2.2.4",
     "portfinder": "^0.4.0",
     "sqlite3": "^3.0.5"
   }

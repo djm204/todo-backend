@@ -16,9 +16,15 @@
     "files": [
         "./src/index.ts",
         "./src/log.ts",
+        "./src/routes/todo/all.ts",
+        "./src/routes/todo/get.ts",
+        "./src/routes/todo/items.ts",
+        "./src/routes/todo/post.ts",
         "./src/typings/bluebird/bluebird.d.ts",
+        "./src/typings/chai/chai.d.ts",
         "./src/typings/chalk/chalk.d.ts",
         "./src/typings/hapi/hapi.d.ts",
+        "./src/typings/mocha/mocha.d.ts",
         "./src/typings/node/node.d.ts",
         "./src/typings/tsd.d.ts"
     ]
