@@ -13,6 +13,9 @@
     },
     "bluebird/bluebird.d.ts": {
       "commit": "575d70adcad0086ec8c6f672a5eb569a4689486c"
+    },
+    "chalk/chalk.d.ts": {
+      "commit": "575d70adcad0086ec8c6f672a5eb569a4689486c"
     }
   }
 }
