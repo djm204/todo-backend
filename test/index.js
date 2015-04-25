@@ -24,3 +24,6 @@ function addItem(message) {
 function editItem(id, message) {
     todo.postItems({ id: id, message: message });
 }
+function rawEditItem(item) {
+    todo.postItems(item);
+}

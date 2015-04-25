@@ -8,7 +8,7 @@ export = {
         if (!request.payload.items) {
             reply("400");
         }
-        items.postItems(request.payload.items);
-        reply("200");
+        var result = items.postItems(request.payload.items);
+        reply(result?"200":"422");
     }
 }

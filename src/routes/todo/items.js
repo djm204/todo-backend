@@ -4,22 +4,39 @@ function getItems() {
 }
 exports.getItems = getItems;
 function postItems(items) {
-    if (items instanceof Array)
-        items.forEach(postItem);
-    else
-        postItem(items);
+    var tempItems = getItems();
+    if (items instanceof Array) {
+        for (var item in items) {
+            var result = postItem(item, tempItems);
+            if (!result)
+                return false;
+        }
+        items = tempItems;
+        items;
+        return true;
+    }
+    var result = postItem(items, tempItems);
+    if (result) {
+        items = tempItems;
+        return true;
+    }
+    return false;
 }
 exports.postItems = postItems;
-function postItem(item) {
+function postItem(item, tempArray) {
     if (!item.id) {
-        items.push({
+        if (!isValidNewItem(item))
+            return false;
+        tempArray.push({
             id: getMaxItemId() + 1,
             message: item.message,
             isDone: item.isDone || 0
         });
         return;
     }
-    for (var index in items) {
+    for (var index in tempArray) {
+        if (!isValidUpdateItem(item))
+            return false;
         var targetItem = items[index];
         if (item.id === targetItem.id) {
             console.log(item);
@@ -43,5 +60,5 @@ function isValidUpdateItem(item) {
     return (typeof item.message !== "undefined" || typeof item.isDone !== "undefined");
 }
 function isValidNewItem(item) {
-    return !!item.message;
+    return (typeof item.message !== "undefined");
 }

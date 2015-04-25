@@ -5,21 +5,42 @@ export function getItems() {
     return items.slice(0);
 }
 
-export function postItems(items: TodoItem|TodoItem[]): void {
-    if (items instanceof Array) items.forEach(postItem);
-    else postItem(<TodoItem>items);
+// TODO: This operation should be atomic
+export function postItems(items: TodoItem|TodoItem[]): boolean {
+    // Apply all changes to tempItems. If any postItem() result is invalid, do not update the original items array.
+    var tempItems = getItems();
+
+    if (items instanceof Array) {
+        for (var item in items) {
+            var result = postItem(item, tempItems);
+            if (!result) return false;
+        }
+        items = tempItems;items;
+        return true;
+    }
+
+    var result = postItem(<TodoItem>items, tempItems);
+    if (result) {
+        items = tempItems;
+        return true;
+    }
+    return false;
 }
 
-function postItem(item: TodoItem): void {
+function postItem(item: TodoItem, tempArray: TodoItem[]): boolean {
+    // We operate on a temporary array to ensure atomic operations
     if (!item.id) {
-        items.push({
+        if (!isValidNewItem(item)) return false;
+        tempArray.push({
             id: getMaxItemId() + 1,
             message: item.message,
             isDone: item.isDone || 0
         });
         return;
     }
-    for (var index in items) {
+
+    for (var index in tempArray) {
+        if (!isValidUpdateItem(item)) return false;
         var targetItem = items[index];
         if (item.id === targetItem.id) {
             // Only update properties that we are provided
@@ -46,5 +67,5 @@ function isValidUpdateItem(item: TodoItem): boolean {
 }
 
 function isValidNewItem(item: TodoItem): boolean {
-    return !!item.message;
+    return (typeof item.message !== "undefined");
 }
