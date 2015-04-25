@@ -20,7 +20,8 @@ describe("Todo item crud tests", () => {
     valueTest("first item will have different message", todo.getItems()[0].message, "old item");
     valueTest("modified first item will still have isDone", todo.getItems()[0].isDone, 0);
 
-
+    rawEditItem([{id: 1, isDone: 1}, {id: 2}]);
+    valueTest("will change nothing due to an item being invalid and postItems being atomic", todo.getItems()[0].isDone, 0);
 });
 
 function valueTest(message: string, value: any, expected: any) {
@@ -37,6 +38,6 @@ function editItem(id: number, message: string) {
     todo.postItems({id: id, message: message });
 }
 
-function rawEditItem(item: TodoItem) {
+function rawEditItem(item: TodoItem|TodoItem[]) {
     todo.postItems(item);
 }
