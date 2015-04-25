@@ -7,7 +7,7 @@
         "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,
-        "outDir": "./dist"
+        "outDir": "./"
     },
     "filesGlob": [
         "./**/*.ts",
@@ -27,6 +27,7 @@
         "./src/typings/hapi/hapi.d.ts",
         "./src/typings/mocha/mocha.d.ts",
         "./src/typings/node/node.d.ts",
-        "./src/typings/tsd.d.ts"
+        "./src/typings/tsd.d.ts",
+        "./test/index.ts"
     ]
 }
