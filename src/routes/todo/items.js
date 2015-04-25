@@ -38,6 +38,8 @@ function postItems(jsonItems) {
 }
 exports.postItems = postItems;
 function postItem(item, tempArray) {
+    if (typeof item === "undefined")
+        return false;
     if (!item.id) {
         if (!isValidNewItem(item))
             return false;

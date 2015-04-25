@@ -44,6 +44,7 @@ export function postItems(jsonItems: any): boolean {
 }
 
 function postItem(item: TodoItem, tempArray: TodoItem[]): boolean {
+    if (typeof item === "undefined") return false;
     // We operate on a temporary array to ensure atomic operations
     if (!item.id) {
         if (!isValidNewItem(item)) return false;
