@@ -23,7 +23,7 @@ function postItem(item) {
         var targetItem = items[index];
         if (item.id === targetItem.id) {
             console.log(item);
-            if (!!item.message)
+            if (typeof item.message !== "undefined")
                 targetItem.message = item.message;
             if (typeof item.isDone !== "undefined")
                 targetItem.isDone = item.isDone;
@@ -40,7 +40,7 @@ function getMaxItemId() {
     return maxId;
 }
 function isValidUpdateItem(item) {
-    return (!!item.message && item.isDone !== null);
+    return (typeof item.message !== "undefined" || typeof item.isDone !== "undefined");
 }
 function isValidNewItem(item) {
     return !!item.message;

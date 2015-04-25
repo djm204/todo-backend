@@ -24,7 +24,7 @@ function postItem(item: TodoItem): void {
         if (item.id === targetItem.id) {
             // Only update properties that we are provided
             console.log(item);
-            if (!!item.message) targetItem.message = item.message;
+            if (typeof item.message !== "undefined") targetItem.message = item.message;
             if (typeof item.isDone !== "undefined") targetItem.isDone = item.isDone;
 
             // We no longer need to iterate since we have updated the matching item.
@@ -42,7 +42,7 @@ function getMaxItemId() {
 }
 
 function isValidUpdateItem(item: TodoItem): boolean {
-    return (!!item.message && item.isDone !== null);
+    return (typeof item.message !== "undefined" || typeof item.isDone !== "undefined");
 }
 
 function isValidNewItem(item: TodoItem): boolean {

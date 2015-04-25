@@ -19,7 +19,6 @@ describe("Todo item crud tests", () => {
 
     valueTest("first item will have different message", todo.getItems()[0].message, "old item");
     valueTest("modified first item will still have isDone", todo.getItems()[0].isDone, 0);
-    console.log(todo.getItems());
 });
 
 function valueTest(message: string, value: any, expected: any) {

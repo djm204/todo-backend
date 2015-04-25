@@ -7,6 +7,6 @@
 
 interface TodoItem {
     id?: number;
-    message: string;
+    message?: string;
     isDone?: number;
 }
