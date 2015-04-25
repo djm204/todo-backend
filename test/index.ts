@@ -20,14 +20,18 @@ describe("Todo item crud tests", () => {
     valueTest("first item will have different message", todo.getItems()[0].message, "old item");
     valueTest("modified first item will still have isDone", todo.getItems()[0].isDone, 0);
 
-    rawEditItem([{id: 1, isDone: 1}, {id: 2}]);
+    rawEditItem([{id: 1, isDone: 20}, { id: 2 }]);
     valueTest("will change nothing due to an item being invalid and postItems being atomic", todo.getItems()[0].isDone, 0);
+
+    todo.postItems('[ { "id": 1, "isDone": 1}, { "id": 2, "isDone": 50 }]')
+    valueTest("will change 1st item isDone using json", todo.getItems()[0].isDone, 1);
+    valueTest("will change 2nd item isDone using json", todo.getItems()[1].isDone, 50);
 });
 
 function valueTest(message: string, value: any, expected: any) {
     it(message, () => {
         expect(value).to.equal(expected);
-    })
+    });
 }
 
 function addItem(message: string) {

@@ -1,18 +1,28 @@
 var items = [];
 function getItems() {
-    return items.slice(0);
+    return items.map(function (item) {
+        return {
+            id: item.id,
+            message: item.message,
+            isDone: item.isDone
+        };
+    });
 }
 exports.getItems = getItems;
-function postItems(postItems) {
+function postItems(jsonItems) {
+    var postItems;
+    if (typeof jsonItems === "string")
+        postItems = JSON.parse(jsonItems);
+    else
+        postItems = jsonItems;
     var tempItems = getItems();
-    if (postItems instanceof Array) {
-        for (var item in postItems) {
-            var result = postItem(item, tempItems);
-            if (!result)
-                return false;
+    if (Array.isArray(postItems)) {
+        var results = postItems.map(function (item) { return postItem(item, tempItems); });
+        if (results.every(function (result) { return result === true; })) {
+            items = tempItems;
+            return true;
         }
-        items = tempItems;
-        return true;
+        return false;
     }
     var result = postItem(postItems, tempItems);
     if (result) {
@@ -34,19 +44,18 @@ function postItem(item, tempArray) {
         return true;
     }
     for (var index in tempArray) {
-        if (!isValidUpdateItem(item))
+        if (!isValidUpdateItem(item)) {
             return false;
-        var targetItem = tempArray[index];
-        if (item.id === targetItem.id) {
-            console.log(item);
+        }
+        if (item.id === tempArray[index].id) {
             if (typeof item.message !== "undefined")
-                targetItem.message = item.message;
+                tempArray[index].message = item.message;
             if (typeof item.isDone !== "undefined")
-                targetItem.isDone = item.isDone;
-            return;
+                tempArray[index].isDone = item.isDone;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 function getMaxItemId() {
     var maxId = 0;

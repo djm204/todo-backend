@@ -1,22 +1,33 @@
+import log = require("../../log");
 var items: TodoItem[] = [];
 
 export function getItems() {
     // Only return a copy of the array so it cannot be mutated
-    return items.slice(0);
+    return items.map(item => {
+        return {
+            id: item.id,
+            message: item.message,
+            isDone: item.isDone
+        }
+    });
 }
 
 // TODO: This operation should be atomic
-export function postItems(postItems: TodoItem|TodoItem[]): boolean {
+export function postItems(jsonItems: any): boolean {
+    var postItems;
+    if (typeof jsonItems === "string") postItems = JSON.parse(jsonItems);
+    else postItems = jsonItems;
+
     // Apply all changes to tempItems. If any postItem() result is invalid, do not update the original items array.
     var tempItems = getItems();
 
-    if (postItems instanceof Array) {
-        for (var item in postItems) {
-            var result = postItem(item, tempItems);
-            if (!result) return false;
+    if (Array.isArray(postItems)) {
+        var results = postItems.map(item => postItem(item, tempItems));
+        if (results.every(result => result === true)) {
+            items = tempItems;
+            return true;
         }
-        items = tempItems;
-        return true;
+        return false;
     }
 
     var result = postItem(<TodoItem>postItems, tempItems);
@@ -40,19 +51,21 @@ function postItem(item: TodoItem, tempArray: TodoItem[]): boolean {
     }
 
     for (var index in tempArray) {
-        if (!isValidUpdateItem(item)) return false;
-        var targetItem = tempArray[index];
-        if (item.id === targetItem.id) {
+        if (!isValidUpdateItem(item)) {
+            return false;
+        }
+        if (item.id === tempArray[index].id) {
             // Only update properties that we are provided
-            console.log(item);
-            if (typeof item.message !== "undefined") targetItem.message = item.message;
-            if (typeof item.isDone !== "undefined") targetItem.isDone = item.isDone;
+
+            if (typeof item.message !== "undefined") tempArray[index].message = item.message;
+            if (typeof item.isDone !== "undefined") tempArray[index].isDone = item.isDone;
 
             // We no longer need to iterate since we have updated the matching item.
-            return;
+            return true;
         }
     }
-    return true;
+    // No match found, invalid operation/request
+    return false;
 }
 
 function getMaxItemId() {

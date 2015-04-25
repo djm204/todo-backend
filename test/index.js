@@ -12,8 +12,11 @@ describe("Todo item crud tests", function () {
     editItem(1, "old item");
     valueTest("first item will have different message", todo.getItems()[0].message, "old item");
     valueTest("modified first item will still have isDone", todo.getItems()[0].isDone, 0);
-    rawEditItem([{ id: 1, isDone: 1 }, { id: 2 }]);
+    rawEditItem([{ id: 1, isDone: 20 }, { id: 2 }]);
     valueTest("will change nothing due to an item being invalid and postItems being atomic", todo.getItems()[0].isDone, 0);
+    todo.postItems('[ { "id": 1, "isDone": 1}, { "id": 2, "isDone": 50 }]');
+    valueTest("will change 1st item isDone using json", todo.getItems()[0].isDone, 1);
+    valueTest("will change 2nd item isDone using json", todo.getItems()[1].isDone, 50);
 });
 function valueTest(message, value, expected) {
     it(message, function () {
