@@ -4,7 +4,8 @@
   "description": "Todo: Backends",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/longshot-io/todo-backend/issues"
   },
-  "homepage": "https://github.com/longshot-io/todo-backend"
+  "homepage": "https://github.com/longshot-io/todo-backend",
+  "dependencies": {
+    "bluebird": "^2.9.24",
+    "chalk": "^1.0.0",
+    "hapi": "^8.4.0",
+    "knex": "^0.7.6",
+    "portfinder": "^0.4.0",
+    "sqlite3": "^3.0.5"
+  }
 }
