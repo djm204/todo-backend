@@ -22,9 +22,10 @@ function postItem(item) {
     for (var index in items) {
         var targetItem = items[index];
         if (item.id === targetItem.id) {
+            console.log(item);
             if (!!item.message)
                 targetItem.message = item.message;
-            if (item.id !== null)
+            if (typeof item.isDone !== "undefined")
                 targetItem.isDone = item.isDone;
             return;
         }
