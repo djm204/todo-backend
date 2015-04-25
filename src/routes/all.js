@@ -1,4 +1,6 @@
 var todoRoutes = require("./todo/all");
+var staticRoute = require("./static");
 module.exports = {
-    todo: todoRoutes
+    todo: todoRoutes,
+    staticRoute: staticRoute
 };
