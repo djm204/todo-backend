@@ -16,6 +16,7 @@
     "files": [
         "./src/index.ts",
         "./src/log.ts",
+        "./src/routes/all.ts",
         "./src/routes/todo/all.ts",
         "./src/routes/todo/get.ts",
         "./src/routes/todo/items.ts",
