@@ -1,5 +1,10 @@
 import log = require("../../log");
-var items: TodoItem[] = [];
+var items: TodoItem[] = [
+    { id: 1, message: "first item", isDone: 0 },
+    { id: 2, message: "second item", isDone: 0 },
+    { id: 3, message: "third item", isDone: 0 },
+    { id: 4, message: "fourth item", isDone: 0 }
+];
 
 export function getItems() {
     // Only return a copy of the array so it cannot be mutated

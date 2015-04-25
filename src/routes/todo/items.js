@@ -1,4 +1,9 @@
-var items = [];
+var items = [
+    { id: 1, message: "first item", isDone: 0 },
+    { id: 2, message: "second item", isDone: 0 },
+    { id: 3, message: "third item", isDone: 0 },
+    { id: 4, message: "fourth item", isDone: 0 }
+];
 function getItems() {
     return items.map(function (item) {
         return {
