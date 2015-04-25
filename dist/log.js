@@ -1,9 +1,9 @@
 var chalk = require("chalk");
 function debug(message) {
-    log("DEBUG", message, chalk.gray);
+    log("DEBUG", message, chalk.blue);
 }
 function info(message) {
-    log("INFO", message, chalk.blue);
+    log("INFO", message, chalk.green);
 }
 function warning(message) {
     log("WARNING", message, chalk.yellow);

@@ -2,12 +2,12 @@ var hapi = require("hapi");
 var log = require("./log");
 var portFinder = require("portfinder");
 var server = new hapi.Server();
-var port;
 portFinder.getPort(function (err, port) {
+    log.debug("Fetched port: " + port);
     port = port;
-    startServer();
+    startServer(port);
 });
-function startServer() {
+function startServer(port) {
     server.connection({
         port: port
     });

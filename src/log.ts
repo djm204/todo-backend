@@ -7,11 +7,11 @@ export = {
 }
 
 function debug(message: string) {
-    log("DEBUG", message, chalk.gray);
+    log("DEBUG", message, chalk.blue);
 }
 
 function info(message: string) {
-    log("INFO", message, chalk.blue);
+    log("INFO", message, chalk.green);
 }
 
 function warning(message: string) {

@@ -4,14 +4,14 @@ import log = require("./log");
 var portFinder = require("portfinder");
 
 var server = new hapi.Server();
-var port: number;
-
 portFinder.getPort((err, port) => {
+
+    log.debug("Fetched port: " + port);
     port = port;
-    startServer();
+    startServer(port);
 });
 
-function startServer() {
+function startServer(port: number) {
     server.connection({
         port: port
     });
