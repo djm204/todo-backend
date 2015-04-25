@@ -22,8 +22,10 @@ function postItem(item) {
     for (var index in items) {
         var targetItem = items[index];
         if (item.id === targetItem.id) {
-            targetItem.message = item.message;
-            targetItem.isDone = item.isDone;
+            if (!!item.message)
+                targetItem.message = item.message;
+            if (item.id !== null)
+                targetItem.isDone = item.isDone;
             return;
         }
     }

@@ -22,8 +22,9 @@ function postItem(item: TodoItem): void {
     for (var index in items) {
         var targetItem = items[index];
         if (item.id === targetItem.id) {
-            targetItem.message = item.message;
-            targetItem.isDone = item.isDone;
+            // Only update properties that we are provided
+            if (!!item.message) targetItem.message = item.message;
+            if (item.id !== null) targetItem.isDone = item.isDone;
 
             // We no longer need to iterate since we have updated the matching item.
             return;
