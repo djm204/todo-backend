@@ -13,7 +13,7 @@ function error(message) {
 }
 function log(prefix, message, color) {
     var now = new Date().toTimeString().slice(0, 8);
-    console.log("[%s] %s: %s", now, prefix, color(message));
+    console.log("[%s] %s: %s", now, color(prefix), message);
 }
 module.exports = {
     debug: debug,

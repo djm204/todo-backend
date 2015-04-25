@@ -24,5 +24,5 @@ function error(message: string) {
 
 function log(prefix: string, message: string, color: Chalk.ChalkChain): void {
     var now = new Date().toTimeString().slice(0,8);
-    console.log("[%s] %s: %s", now, prefix, color(message));
+    console.log("[%s] %s: %s", now, color(prefix), message);
 }
