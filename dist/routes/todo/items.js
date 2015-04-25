@@ -36,3 +36,9 @@ function getMaxItemId() {
     });
     return maxId;
 }
+function isValidUpdateItem(item) {
+    return (!!item.message && item.isDone !== null);
+}
+function isValidNewItem(item) {
+    return !!item.message;
+}

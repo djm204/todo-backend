@@ -38,3 +38,11 @@ function getMaxItemId() {
     });
     return maxId;
 }
+
+function isValidUpdateItem(item: TodoItem): boolean {
+    return (!!item.message && item.isDone !== null);
+}
+
+function isValidNewItem(item: TodoItem): boolean {
+    return !!item.message;
+}

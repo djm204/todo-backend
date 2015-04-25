@@ -1,14 +1,12 @@
-import items = require("./items");
-import hapi = require("hapi");
-
-export = {
+var items = require("./items");
+module.exports = {
     method: "POST",
     path: "/todo",
-    handler: (request: hapi.Request, reply: hapi.IReply) => {
+    handler: function (request, reply) {
         if (!request.payload.items) {
             reply("400");
         }
         items.postItems(request.payload.items);
         reply("200");
     }
-}
+};
