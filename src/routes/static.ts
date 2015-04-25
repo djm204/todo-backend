@@ -4,7 +4,7 @@ export = {
     path: "/{param*}",
     handler: {
         directory: {
-            path: path.join(__dirname, "../../../front")
+            path: path.join(__dirname, "../../../front/src")
         }
     }
 }
