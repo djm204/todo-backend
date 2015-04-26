@@ -4,7 +4,7 @@ var expect = chai.expect;
 
 describe("Todo item crud tests", () => {
     valueTest("will have no items", todo.getItems().length, 0);
-
+    console.log(todo.getItems());
     addItem("new item");
 
     valueTest("will have 1 item in the collection", todo.getItems().length, 1);
@@ -35,13 +35,13 @@ function valueTest(message: string, value: any, expected: any) {
 }
 
 function addItem(message: string) {
-    todo.postItems({ message: message });
+    todo.postItems(JSON.stringify({ message: message }));
 }
 
 function editItem(id: number, message: string) {
-    todo.postItems({id: id, message: message });
+    todo.postItems(JSON.stringify({id: id, message: message }));
 }
 
 function rawEditItem(item: TodoItem|TodoItem[]) {
-    todo.postItems(item);
+    todo.postItems(JSON.stringify(item));
 }

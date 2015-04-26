@@ -3,6 +3,7 @@ var todo = require("../src/routes/todo/items");
 var expect = chai.expect;
 describe("Todo item crud tests", function () {
     valueTest("will have no items", todo.getItems().length, 0);
+    console.log(todo.getItems());
     addItem("new item");
     valueTest("will have 1 item in the collection", todo.getItems().length, 1);
     valueTest("will have an id of 1", todo.getItems()[0].id, 1);
@@ -24,11 +25,11 @@ function valueTest(message, value, expected) {
     });
 }
 function addItem(message) {
-    todo.postItems({ message: message });
+    todo.postItems(JSON.stringify({ message: message }));
 }
 function editItem(id, message) {
-    todo.postItems({ id: id, message: message });
+    todo.postItems(JSON.stringify({ id: id, message: message }));
 }
 function rawEditItem(item) {
-    todo.postItems(item);
+    todo.postItems(JSON.stringify(item));
 }

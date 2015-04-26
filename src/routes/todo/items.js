@@ -1,9 +1,4 @@
-var items = [
-    { id: 1, message: "first item", isDone: 0 },
-    { id: 2, message: "second item", isDone: 0 },
-    { id: 3, message: "third item", isDone: 0 },
-    { id: 4, message: "fourth item", isDone: 0 }
-];
+var items = [];
 function getItems() {
     return items.map(function (item) {
         return {
@@ -15,11 +10,9 @@ function getItems() {
 }
 exports.getItems = getItems;
 function postItems(jsonItems) {
-    var postItems;
-    if (typeof jsonItems === "string")
-        postItems = JSON.parse(jsonItems);
-    else
-        postItems = jsonItems;
+    if (typeof jsonItems !== "string")
+        return false;
+    var postItems = JSON.parse(jsonItems);
     var tempItems = getItems();
     if (Array.isArray(postItems)) {
         var results = postItems.map(function (item) { return postItem(item, tempItems); });

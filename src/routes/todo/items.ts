@@ -1,10 +1,5 @@
 import log = require("../../log");
-var items: TodoItem[] = [
-    { id: 1, message: "first item", isDone: 0 },
-    { id: 2, message: "second item", isDone: 0 },
-    { id: 3, message: "third item", isDone: 0 },
-    { id: 4, message: "fourth item", isDone: 0 }
-];
+var items: TodoItem[] = [];
 
 export function getItems() {
     // Only return a copy of the array so it cannot be mutated
@@ -18,10 +13,9 @@ export function getItems() {
 }
 
 // TODO: This operation should be atomic
-export function postItems(jsonItems: any): boolean {
-    var postItems;
-    if (typeof jsonItems === "string") postItems = JSON.parse(jsonItems);
-    else postItems = jsonItems;
+export function postItems(jsonItems: string): boolean {
+    if (typeof jsonItems !== "string") return false;
+    var postItems = JSON.parse(jsonItems);
 
     // Apply all changes to tempItems. If any postItem() result is invalid, do not update the original items array.
     var tempItems = getItems();
