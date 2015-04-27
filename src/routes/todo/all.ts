@@ -1,3 +1,4 @@
 import get = require("./get");
 import post = require("./post");
-export = [get, post];
+import deleteItem = require("./delete");
+export = [get, post, deleteItem];

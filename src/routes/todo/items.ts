@@ -1,5 +1,5 @@
 import log = require("../../log");
-var items: TodoItem[] = [];
+var items: TodoItem[] = []; // TODO: change to `_items`?
 
 export function getItems() {
     // Only return a copy of the array so it cannot be mutated
@@ -35,6 +35,21 @@ export function postItems(jsonItems: string): boolean {
         return true;
     }
     return false;
+}
+
+export function deleteItem(jsonItem: string): boolean {
+    var deleting: TodoItem = JSON.parse(jsonItem);
+    getItems().forEach(item => {
+        if(deleting.id === item.id)
+            deleteFromDatabase(deleting);
+        });
+    return false;
+}
+
+function deleteFromDatabase(deleting) {
+    var markForDeletion = items.map(item => { return item.id; }).indexOf(deleting.id);
+    items.splice(markForDeletion, 1);
+    return true;
 }
 
 function postItem(item: TodoItem, tempArray: TodoItem[]): boolean {
@@ -77,7 +92,7 @@ function getMaxItemId() {
 }
 
 function isValidUpdateItem(item: TodoItem): boolean {
-    return(!!item.id && (typeof item.message !== "undefined" || typeof item.isDone !== "undefined"));
+    return (!!item.id && (typeof item.message !== "undefined" || typeof item.isDone !== "undefined"));
 }
 
 function isValidNewItem(item: TodoItem): boolean {
