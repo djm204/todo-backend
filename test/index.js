@@ -18,6 +18,8 @@ describe("Todo item crud tests", function () {
     todo.postItems('[ { "id": 1, "isDone": 1}, { "id": 2, "isDone": 50 }]');
     valueTest("will change 1st item isDone using json", todo.getItems()[0].isDone, 1);
     valueTest("will change 2nd item isDone using json", todo.getItems()[1].isDone, 50);
+    todo.deleteItem('{ "id": 1 }');
+    valueTest("will delete the item", findItem(1), false);
 });
 function valueTest(message, value, expected) {
     it(message, function () {
@@ -32,4 +34,8 @@ function editItem(id, message) {
 }
 function rawEditItem(item) {
     todo.postItems(JSON.stringify(item));
+}
+function findItem(itemId) {
+    var items = todo.getItems();
+    return items.some(function (item) { return item.id === itemId; });
 }

@@ -33,6 +33,6 @@ function seedData() {
         { id: 3, message: "third item", isDone: 0 },
         { id: 4, message: "fourth item", isDone: 0 }];
 
-        todo.postItems(JSON.stringify(data));
-        log.info("Seeded dummy data to TodoList");
+    todo.postItems(JSON.stringify(data));
+    log.info("Seeded dummy data to TodoList");
 }

@@ -32,18 +32,16 @@ function postItems(jsonItems) {
 exports.postItems = postItems;
 function deleteItem(jsonItem) {
     var deleting = JSON.parse(jsonItem);
-    getItems().forEach(function (item) {
-        if (deleting.id === item.id)
-            deleteFromDatabase(deleting);
-    });
+    for (var i in getItems()) {
+        var item = items[i];
+        if (deleting.id !== item.id)
+            continue;
+        items.splice(i, 1);
+        return true;
+    }
     return false;
 }
 exports.deleteItem = deleteItem;
-function deleteFromDatabase(deleting) {
-    var markForDeletion = items.map(function (item) { return item.id; }).indexOf(deleting.id);
-    items.splice(markForDeletion, 1);
-    return true;
-}
 function postItem(item, tempArray) {
     if (typeof item === "undefined")
         return false;
